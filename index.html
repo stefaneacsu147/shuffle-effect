@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Shuffle Effect</title>
+  <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="content">
+    <div class="random">
+      <span class="span nbr ltr">0</span>
+      <span class="span nbr ltr">0</span>
+      <span class="span nbr ltr">0</span>
+      <span class="span nbr ltr">0</span>
+      <span class="span nbr ltr">0</span>
+      <span class="span nbr ltr">0</span>
+      <span class="span nbr ltr">0</span>
+      <span class="span nbr ltr">0</span>
+      <span class="span nbr ltr">0</span>
+      <span class="span nbr ltr">0</span>
+      <span class="span nbr ltr">0</span>
+      <span class="span nbr ltr">0</span>
+      <span class="span nbr ltr">0</span>
+      <span class="span nbr ltr">0</span>
+      <span class="span nbr ltr">0</span>
+      <span class="span nbr ltr">0</span>
+      <span class="span nbr ltr">0</span>
+      <span class="span nbr ltr">0</span>
+      <span class="span nbr ltr">0</span>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      var $randomNumber = $('.nbr');
+      var $timer = 30;
+      var $it;
+      var $data = 0;
+      var index;
+      var change;
+      var letters = ["s", "t", "e", "f", "a", "n", "s", "h", "u", "f", "f", "l", "e","e", "f", "f","e","c","t"];
+
+      $randomNumber.each(function () {
+        change = Math.round(Math.random() * 100);
+        $(this).attr('data-change', change);
+      });
+
+      function random() {
+        return Math.round(Math.random() * 9);
+      };
+
+      function select() {
+        return Math.round(Math.random() * $randomNumber.length + 1);
+      };
+
+      function value() {
+        $('.nbr:nth-child(' + select() + ')').html('' + random() + '');
+        $('.nbr:nth-child(' + select() + ')').attr('data-number', $data);
+        $data++;
+
+        $randomNumber.each(function () {
+          if (parseInt($(this).attr('data-number')) > parseInt($(this).attr('data-change'))) {
+            index = $('.ltr').index(this);
+            $(this).html(letters[index]);
+            $(this).removeClass('nbr');
+          }
+        });
+      };
+      $it = setInterval(value, $timer);
+    });
+  </script>
+</body>
+
+</html>
